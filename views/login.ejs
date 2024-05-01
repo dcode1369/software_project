@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <style>
+    
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    h2 {
+        text-align: center;
+        padding: 5px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 30px;
+    }
+
+    
+    header {
+        background-color: #eae3e3;
+        color: #fff;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+		height: 80px;
+    }
+
+    .header-text {
+        font-size: 40px;
+		color: #064A89;
+		font-family: 'Times New Roman', Times, serif;
+    }
+
+    
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin-top: -50px; 
+    }
+
+    .screen {
+        background: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px 0px #000000;
+        overflow: hidden;
+        width: 800px;
+		height: 350px;
+        display: flex;
+    }
+
+    .screen__content {
+        padding: 20px;
+    }
+	
+    .description {
+		padding: 20px;
+        text-align: left;
+		height: 100%; 
+        width: 50%; 
+    }
+	
+    .login-form {
+		padding: 20px;
+        text-align: left;
+		height: 100%; 
+        width: 40%; 
+    }
+
+    .login__field {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .login__icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+    }
+
+    .login__input {
+        width: 70%;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .login__submit {
+        background-color: #064A89;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .login__submit:hover {
+        background-color: #555;
+    }
+
+    .button__icon {
+        margin-left: 10px;
+    }
+
+    
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 10px;
+        }
+
+        .header-text {
+            font-size: 24px;
+        }
+
+        .container {
+            height: auto;
+        }
+
+        .screen {
+            width: 90%;
+        }
+		
+		.description,
+		.login-form {
+            width: 100%;
+        }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="https://e7.pngegg.com/pngimages/492/953/png-clipart-hunters-point-tetra-tech-logo-engineering-company-technology-blue-electronics.png" alt="Left Logo" style="width: 210px; height: 75px;margin-left: 20px;">
+        <div class="header-text"><strong>Project Management System</strong></div>
+        <img class="logo" src="https://e7.pngegg.com/pngimages/492/953/png-clipart-hunters-point-tetra-tech-logo-engineering-company-technology-blue-electronics.png" alt="Right Logo" style="width: 200px; height: 88px;">
+    </header>
+    <div class="container">
+        <div class="screen">
+            <div class="description">
+                <h2>Description</h2>
+                <p>This is a description of the Project Management System. Provide some information about the system here.</p>
+            </div>
+            <div class="login-form">
+                <form class="login" action="/login" method="post">
+					<label for="login" style="font-size: 20px; padding: 5px;"><strong>Login</strong></label>
+					<br><br>	
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" class="login__input" placeholder="Employee ID" name="empId" required oninvalid="this.setCustomValidity('Please Enter valid Employee ID')" oninput="setCustomValidity('')">
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" class="login__input" placeholder="Password" name="password" required oninvalid="this.setCustomValidity('Please Enter valid Password')" oninput="setCustomValidity('')">
+                    </div>
+                    <button class="button login__submit">
+                        <span class="button__text">Log In</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                </form>
+                <div class="error-message">
+                    <% if (typeof error !== 'undefined' && error !== null) { %>
+                        <p style="color: red;"><%= error %></p>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

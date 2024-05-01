@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset some default styles for the body and heading */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+    
+        /* Style the header */
+        header {
+            background-color: #eae3e3;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+    
+        .header-text {
+            font-size: 40px;
+            color: #064A89;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .second-header{
+            height: 15px;
+        }
+        #logout {
+            background-color: #064A89;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+    
+        #logout:hover {
+            background-color: #e60000;
+        }
+        /* Style the sidebar */
+        .sidebar {
+            min-height: 380px;
+            background-color: #064A89;
+            color: #fff;
+            width: 250px;
+            height: auto;
+            position: absolute;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+        
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+        }
+        
+        .sidebar a:hover {
+            background-color: #064A89;
+        }
+        .page {
+            min-height: 380px;
+        margin-left: 260px; 
+        margin-right: 15px;
+        margin-top:-20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px 0px #000000;
+    }
+    input{
+        border-radius: 5px;
+    }
+    button{
+        background-color: #064A89;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+    }
+    #empId{
+        margin-left: 10px;
+    }
+    #taskType{
+        margin-left: 28px;
+    }
+    #assignedOn{
+        margin-left: 5px;
+    }
+    #crNumber{
+        margin-left: 35px;
+    }
+    #pdc{
+        margin-left: 87px;
+    }
+    #actionItem{
+        margin-left: 46px;
+    }
+    #crDetails{
+        margin-left: 56px;
+    }
+    label{
+        margin-left: 10px;
+    }
+    </style>
+    <title>Task Assignment</title>
+</head>
+<body>
+    <header>
+        <img class="logo" src="https://e7.pngegg.com/pngimages/492/953/png-clipart-hunters-point-tetra-tech-logo-engineering-company-technology-blue-electronics.png" alt="Left Logo" style="width: 210px; height: 75px;margin-left: 20px;">
+        <div class="header-text"><strong>Project Management System</strong></div>
+        <img class="logo" src="https://e7.pngegg.com/pngimages/492/953/png-clipart-hunters-point-tetra-tech-logo-engineering-company-technology-blue-electronics.png" alt="Right Logo" style="width: 200px; height: 88px;">
+    </header>
+    <br>
+    <header class="second-header">
+        <p style="color: black; margin-left: 15px;"><strong>Welcome, <%= mngName %></strong></p>
+        <p style="color: black; text-align: center;"><strong>Manager's Dashboard</strong></p>
+        <a href="login.html">
+            <button id="logout" type="submit">Logout</button>
+        </a>
+    </header>
+    <br>
+    <div class="sidebar">
+        <a href="manager">Home</a>
+        <a href="empList?mngName=<%= mngName %>&mngId=<%=mngId%>">Assign</a>
+        <a href="mngOpenTask?mngName=<%=mngName%>&mngId=<%=mngId%>">Open Tasks</a>
+        <a href="mngClosedTask?mngName=<%=mngName%>&mngId=<%=mngId%>">Closed Tasks</a>
+        <a href="mngReport?mngName=<%=mngName%>&mngId=<%=mngId%>">Report</a>
+        <a href="empData?mngName=<%=mngName%>&mngId=<%=mngId%>">Admin Data</a>
+        <a href="addEmployee?mngName=<%= mngName %>&mngId=<%= mngId %>">Add Employee</a>
+        <a href="mngReset?mngName=<%= mngName %>&mngId=<%= mngId %>"> Reset Password</a>
+    </div>
+    <div class="page">
+        <h2 style="text-align: center; padding-top: 10px;">Assign Task</h2>
+        <form action="/assign" method="post">
+            <input type="hidden" name="mngId" value="<%= mngId %>">
+            <input type="hidden" name="mngName" value="<%= mngName %>">
+            <label for="empId"><strong>Employee Id</strong></label>
+            <input id="empId" type="text" name="empId" placeholder="Employee ID" value="<%=empId%>" readonly>
+            <label for="empName"><strong>Employee Name</strong></label>
+            <input id="empName" type="text" name="empName" placeholder="Employee Name" value="<%=empName%>" readonly>
+            <label for="actionItem"><strong>Action Item</strong></label>
+            <input id="actionItem" type="text" name="actionItem" placeholder="Action Item">
+            <br><br>
+            <label for="taskType"><strong>Task Type</strong></label>
+            <input id="taskType" type="text" name="taskType" placeholder="Task Type">
+            <label for="crNumber"><strong>CR Number</strong></label>
+            <input id="crNumber" type="text" name="crNumber" placeholder="CR Number" required oninvalid="this.setCustomValidity('Please Enter CR Number')" oninput="setCustomValidity('')">
+            <label for="crDetails"><strong>CR Details</strong></label>
+            <input id="crDetails" type="text" name="crDetails" placeholder="CR Details" required oninvalid="this.setCustomValidity('Please Enter CR Details')" oninput="setCustomValidity('')">
+            <br><br>
+            <label for="assignedOn"><strong>Assigned On</strong></label>
+            <input type="date" id="assignedOn" name="assignedOn" readonly>
+            <label for="pdc" style="margin-left: 73px;"><strong>PDC</strong></label>
+            <input type="date" id="pdc" name="pdc" required oninvalid="this.setCustomValidity('Please Enter PDC')" oninput="setCustomValidity('')">
+            <label for="mangRemarks" style="margin-left: 70px;"><strong>Manager Remarks</strong></label>
+            <input type="text" id="mangRemarks" name="mangRemarks" placeholder="Remarks">
+            <br><br>
+            <label for="additionalCC"><strong>Additional CC</strong></label>
+            <input id="additionalCC" type="text" name="additionalCC" placeholder="Additional CC">
+            <br><br>
+            <button type="submit" style="margin-left: 10px;">Assign</button>
+            <br><br>
+            <div id="error-message" style="color: red;margin-left: 10px;"></div>
+            <div id="success" style="color: green;margin-left: 10px;"></div>
+        </form>
+    </div>
+    <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById("pdc").setAttribute("min", today);
+        document.getElementById("assignedOn").value = today;
+        document.addEventListener('DOMContentLoaded', function () {
+        const errorMessage = document.getElementById('error-message');
+        let urlParams = new URLSearchParams(window.location.search);
+        const errorParam = urlParams.get('error');
+        const succMessage=document.getElementById('success');
+        urlParams = new URLSearchParams(window.location.search);
+        const successParam = urlParams.get('success');
+        if (errorParam) {
+          errorMessage.textContent = errorParam;
+        }
+        if(successParam)
+        {
+            succMessage.textContent=successParam;
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+            }
+            header {
+                background-color: #eae3e3;
+                color: #fff;
+                padding: 10px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 80px;
+            }
+        
+            .header-text {
+                font-size: 40px;
+                color: #064A89;
+                font-family: 'Times New Roman', Times, serif;
+            }
+            .second-header{
+                height: 15px;
+            }
+            #logout {
+                background-color: #064A89;
+                border: none;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                text-decoration: none;
+                margin-right: 15px;
+                cursor: pointer;
+            }
+        
+            #logout:hover {
+                background-color: #e60000;
+            }
+            .sidebar {
+                min-height: 375px;
+                background-color: #064A89;
+                color: #fff;
+                width: 250px;
+                height: auto;
+                position: absolute;
+                overflow-y: auto;
+                border-radius: 10px;
+            }
+            
+            .sidebar a {
+                padding: 15px;
+                text-decoration: none;
+                color: #fff;
+                display: block;
+            }
+            
+            .sidebar a:hover {
+                background-color: #064A89;
+            }
+            .page {
+            min-height: 380px;
+            margin-left: 260px; 
+            margin-right: 15px;
+            margin-top:-20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 0px #000000;
+        }
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 5px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #064A89;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ccc;
+    }
+        </style>
+        <title>Manager Dashboard</title>
+    </head>
+    <body>
+        <header>
+            <img class="logo" src="https://e7.pngegg.com/pngimages/492/953/png-clipart-hunters-point-tetra-tech-logo-engineering-company-technology-blue-electronics.png" alt="Left Logo" style="width: 210px; height: 75px;margin-left: 20px;">
+            <div class="header-text"><strong>Project Management System</strong></div>
+            <img class="logo" src="https://e7.pngegg.com/pngimages/492/953/png-clipart-hunters-point-tetra-tech-logo-engineering-company-technology-blue-electronics.png" alt="Right Logo" style="width: 200px; height: 88px;">
+        </header>
+        <br>
+        <header class="second-header">
+            <p style="color: black; margin-left: 15px;"><strong>Welcome, <%= mngName %></strong></p>
+            <p style="color: black; text-align: center;"><strong>Manager's Dashboard</strong></p>
+            <a href="login.html">
+                <button id="logout" type="submit">Logout</button>
+            </a>
+        </header>
+        <br>
+        <div class="sidebar">
+            <a href="manager">Home</a>
+            <a href="empList?mngName=<%= mngName %>&mngId=<%=mngId%>">Assign</a>
+            <a href="mngOpenTask?mngName=<%=mngName%>&mngId=<%=mngId%>">Open Tasks</a>
+            <a href="mngClosedTask?mngName=<%=mngName%>&mngId=<%=mngId%>">Closed Tasks</a>
+            <a href="mngReport?mngName=<%=mngName%>&mngId=<%=mngId%>">Report</a>
+            <a href="empData?mngName=<%=mngName%>&mngId=<%=mngId%>">Admin Data</a>
+            <a href="addEmployee?mngName=<%= mngName %>&mngId=<%= mngId %>">Add Employee</a>
+            <a href="mngReset?mngName=<%= mngName %>&mngId=<%= mngId %>"> Reset Password</a>
+        </div>
+        <div class="page">
+            <h2 style="text-align: center; padding-top: 10px;">
+                Welcome to the Home Page
+            </h2>
+            <h3 style="text-align: center;">Your Profile</h3>
+            <table >
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td><strong>Employee Id</strong></td>
+                    <td><%= manager.empId %></td>
+                </tr>
+                <tr>
+                    <td><strong>Name</strong></td>
+                    <td><%= manager.name %></td>
+                </tr>
+                <tr>
+                    <td><strong>Role</strong></td>
+                    <td><%= manager.role %></td>
+                </tr>
+                <tr>
+                    <td><strong>Email</strong></td>
+                    <td><%= manager.email %></td>
+                </tr>
+                <tr>
+                    <td><strong>Phone</strong></td>
+                    <td><%= manager.phone %></td>
+                </tr>
+                <tr>
+                    <td><strong>Open Tasks Count</strong></td>
+                    <td><%= notClosedTaskCount %></td>
+                </tr>
+                <tr>
+                    <td><strong>Closed Tasks Count</strong></td>
+                    <td><%= closedTaskCount %></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+    </html>

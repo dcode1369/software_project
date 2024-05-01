@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Report</title>
+    <style>
+        /* Reset some default styles for the body and heading */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+    
+        /* Style the header */
+        header {
+            background-color: #eae3e3;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+    
+        .header-text {
+            font-size: 40px;
+            color: #064A89;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .second-header{
+            height: 15px;
+        }
+        button{
+            background-color: #064A89;
+            border: none;
+            color: white;
+            padding: 5px 3px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 1px;
+            cursor: pointer;
+        }
+        #logout {
+            background-color: #064A89;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+    
+        #logout:hover {
+            background-color: #e60000;
+        }
+        .sidebar {
+            min-height: 380px;
+            background-color: #064A89;
+            color: #fff;
+            width: 250px;
+            height: auto;
+            position: absolute;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+        
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            color: #fff;
+            display: block;
+        }
+        
+        .sidebar a:hover {
+            background-color: #064A89;
+        }
+        .page {
+            min-height: 380px;
+        margin-left: 260px; 
+        margin-right: 15px;
+        margin-top:-20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px 0px #000000;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 5px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #064A89;
+        color: #fff;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ccc;
+    }
+    input{
+        border-radius: 5px;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="https://e7.pngegg.com/pngimages/492/953/png-clipart-hunters-point-tetra-tech-logo-engineering-company-technology-blue-electronics.png" alt="Left Logo" style="width: 210px; height: 75px;margin-left: 20px;">
+        <div class="header-text"><strong>Project Management System</strong></div>
+        <img class="logo" src="https://e7.pngegg.com/pngimages/492/953/png-clipart-hunters-point-tetra-tech-logo-engineering-company-technology-blue-electronics.png" alt="Right Logo" style="width: 200px; height: 88px;">
+    </header>
+    <br>
+    <header class="second-header">
+        <p style="color: black; margin-left: 15px;"><strong>Welcome, <%= empName %></strong></p>
+        <p style="color: black; text-align: center;"><strong>Employee's Dashboard</strong></p>
+        <a href="login.html">
+            <button id="logout" name="logout">Logout</button>
+        </a>
+    </header>
+    <br>
+    <div class="sidebar">
+        <a href="employee">Home</a>
+        <a href="empOpenTask?empName=<%= empName %>&empId=<%= empId %>">Open Tasks</a>
+        <a href="empClosedTask?empName=<%= empName %>&empId=<%= empId %>">Closed Tasks</a>
+        <a href="empReport?empName=<%= empName %>&empId=<%= empId %>">Report</a>
+        <a href="resetPass?empName=<%= empName %>&empId=<%= empId %>"> Reset Password</a>
+    </div>
+    <div class="page">
+        <h2 style="text-align: center; padding-top: 10px;">Report Page</h2>
+        <form action="/empReport" method="post" onsubmit="return validateDate()">
+            <input type="hidden" id="empId" name="empId" value="<%= empId %>">
+            <input type="hidden" id="empName" name="empName" value="<%= empName %>">
+            <label for="startDate"><strong>From Date:</strong></label>
+            <input type="date" id="startDate" name="startDate" required oninvalid="this.setCustomValidity('Please Enter valid Starting Date')" oninput="setCustomValidity('')">
+            
+            <label for="endDate"><strong>To Date:</strong></label>
+            <input type="date" id="endDate" name="endDate" required oninvalid="this.setCustomValidity('Please Enter valid Ending Date')" oninput="setCustomValidity('')">
+
+            <label for="status"><strong>Status:</strong></label>
+            <select class="status-dropdown" name="status">
+                <option value="All">All</option>
+                <option value="Assigned" >Assigned</option>
+                <option value="In Progress" >In Progress</option>
+                <option value="Completed" >Completed</option>
+                <option value="Closed" >Closed</option>
+            </select>
+
+            <button type="submit" id="submit">Generate Report</button>
+        </form>
+        <% if (tasks.length > 0) { %>
+            <h3 style="text-align: center;">Task Details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serial No.</th>
+                        <th>Action Item</th>
+                        <th>Task Type</th>
+                        <th>CR Number</th>
+                        <th>CR Details</th>
+                        <th>Assigned On</th>
+                        <th>PDC</th>
+                        <th>ADC</th>
+                        <th>Manager Remarks</th>
+                        <th>Assigned By</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let serialNumber = 1; %>
+                    <% tasks.forEach(task => { %>
+                        <tr>
+                            <td><%= serialNumber++ %></td>
+                            <td><%= task.actionItem %></td>
+                            <td><%= task.taskType %></td>
+                            <td><%= task.crNumber %></td>
+                            <td><%= task.crDetails %></td>
+                            <td><%= task.assignedOn %></td>
+                            <td><%= task.pdc %></td>
+                            <td><%= task.adc %></td>
+                            <td><%= task.mangRemarks %></td>
+                            <td><%= task.assignedBy %></td>
+                            <td><%= task.status %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No task was assigned.</p>
+        <% } %>
+    </div>
+    <script>
+        function validateDate() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+    
+            if (startDate > endDate) {
+                alert('Start Date cannot be greater than End Date');
+                return false;
+            }
+    
+            return true;
+        }
+    </script>
+</body>
+</html>

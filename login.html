@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+  <style>
+    /* Reset some default styles for the body and heading */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    h2 {
+        text-align: center;
+        padding: 5px;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 30px;
+    }
+
+    /* Style the header */
+    header {
+        background-color: #eae3e3;
+        color: #fff;
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+		height: 80px;
+    }
+
+    .header-text {
+        font-size: 40px;
+		color: #064A89;
+		font-family: 'Times New Roman', Times, serif;
+    }
+
+    /* Style the login form and description */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin-top: -50px; /* Add negative margin to shift it up */
+    }
+
+    .screen {
+        background: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px 0px #000000;
+        overflow: hidden;
+        width: 800px;
+		height: 350px;
+        display: flex;
+    }
+
+    .screen__content {
+        padding: 20px;
+    }
+	
+    .description {
+		padding: 20px;
+        text-align: left;
+		height: 100%; /* Take the full height of the parent container */
+        width: 50%; /* Divide the container into two columns */
+    }
+	
+    .login-form {
+		padding: 20px;
+        text-align: left;
+		height: 100%; /* Take the full height of the parent container */
+        width: 40%; /* Divide the container into two columns */
+    }
+
+    .login__field {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .login__icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+    }
+
+    .login__input {
+        width: 70%;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .login__submit {
+        background-color: #064A89;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .login__submit:hover {
+        background-color: #555;
+    }
+
+    .button__icon {
+        margin-left: 10px;
+    }
+
+    /* Add some spacing for responsiveness */
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 10px;
+        }
+
+        .header-text {
+            font-size: 24px;
+        }
+
+        .container {
+            height: auto;
+        }
+
+        .screen {
+            width: 90%;
+        }
+		
+		.description,
+		.login-form {
+            width: 100%;
+        }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <img class="logo" src="https://b2bmarketing.exchange/wp-content/uploads/2021/06/TATA-GROUP-TATA-TECHNOLOGIES-LOGO-01.png" alt="Left Logo" style="width: 210px; height: 75px;margin-left: 20px;">
+        <div class="header-text"><strong>Project Management System</strong></div>
+        <img class="logo" src="https://1000logos.net/wp-content/uploads/2020/04/Tata-Logo-1988.png" alt="Right Logo" style="width: 200px; height: 88px;">
+    </header>
+    <div class="container">
+        <div class="screen">
+            <div class="description">
+                <p style="margin-top: 50px;">Welcome to the Project Management System, a robust platform designed to streamline project coordination and enhance productivity. 
+                    <br>
+                    Our system empowers project managers, team members, and stakeholders to collaborate seamlessly, monitor project progress, and achieve project goals efficiently. 
+                    <br>
+                    With intuitive features and real-time updates, we simplify project management, enabling you to focus on what matters most - successful project delivery.</p>
+            </div>
+            <div class="login-form">
+                <form class="login" action="/login" method="post">
+					<label for="login" style="font-size: 20px; padding: 5px;"><strong>Login</strong></label>
+					<br><br>	
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" class="login__input" placeholder="Employee ID" name="empId" required oninvalid="this.setCustomValidity('Please Enter valid Employee ID')" oninput="setCustomValidity('')">
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" class="login__input" placeholder="Password" name="password" required oninvalid="this.setCustomValidity('Please Enter valid Password')" oninput="setCustomValidity('')">
+                    </div>
+                    <button class="button login__submit">
+                        <span class="button__text">Log In</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
